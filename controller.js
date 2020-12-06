@@ -6,13 +6,21 @@ exports.restaurantController = {
         res.json(restaurants);
     },
     getRestaurant(req,res){
-        let  retaurant;
-        for (retaurant in restaurants){
+       // let  retaurant;
+       let isIdFound = false;
+        for (let i in restaurants){
+            const  retaurant = restaurants[i];
+            // console.log(req.params.id);
+            // console.log(retaurant.id);
             if (retaurant.id == req.params.id){
-                res.json(retaurant);
+                res.send(retaurant);
+                isIdFound = true;
             }
         }
-        res.send("Reustourant with this id has not found. ")
+        if(!isIdFound){
+            res.send("Reustourant with this id has not found. ");
+        }
+    
     },
     addRestaurants(req,res){
         const {body} = req;
